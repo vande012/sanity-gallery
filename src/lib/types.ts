@@ -1,4 +1,6 @@
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { PortableTextBlock } from '@portabletext/types'
+import { Image } from 'sanity'
 
 export interface GalleryImage {
   _key: string;
@@ -18,3 +20,19 @@ export interface GalleryType {
   title: string;
   categories: GalleryCategory[];
 }
+
+export interface Hero {
+    header: string
+    paragraph: PortableTextBlock[]
+    button: {
+      text: string
+      link: string
+    }
+    image: Image
+  }
+
+  export interface Navbar {
+    logo: Image
+    ctaText: string
+    ctaLink: string
+  }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -11,10 +11,44 @@ import { urlFor } from "../lib/sanity";
 interface GalleryProps {
   items: GalleryType;
 }
+
 const Gallery: React.FC<GalleryProps> = ({ items }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const galleryRef = useRef<HTMLElement>(null);
 
   const categories = ["All", ...items.categories.map((cat) => cat.name)];
+
+  const handleCategoryChange = useCallback((hash: string) => {
+    if (hash.startsWith('gallery-')) {
+      const category = hash.replace('gallery-', '').replace(/-/g, ' ');
+      const matchedCategory = categories.find(cat => cat.toLowerCase() === category.toLowerCase());
+      if (matchedCategory) {
+        setSelectedCategory(matchedCategory);
+        if (galleryRef.current) {
+          galleryRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      handleCategoryChange(window.location.hash.slice(1));
+    };
+
+    const handleGalleryNavigation = (event: CustomEvent) => {
+      handleCategoryChange(event.detail);
+    };
+
+    handleHashChange(); // Check hash on mount
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('galleryNavigation', handleGalleryNavigation as EventListener);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('galleryNavigation', handleGalleryNavigation as EventListener);
+    };
+  }, [handleCategoryChange]);
 
   const displayImages: GalleryImage[] =
     selectedCategory === "All"
@@ -23,14 +57,16 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
         [];
 
   return (
-    <section className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">{items.title}</h2>
-
-      <div className="flex justify-center space-x-4 mb-8">
+    <section ref={galleryRef} id="gallery" className="container mx-auto px-4 py-12">
+      <h2 className="text-3xl font-bold text-center mb-8">Our Portfolio</h2>
+      <div className="flex justify-center space-x-2 mb-8">
         {categories.map((category) => (
           <Button
             key={category}
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => {
+              setSelectedCategory(category);
+              window.history.pushState(null, '', `#gallery-${category.toLowerCase().replace(/\s+/g, '-')}`);
+            }}
             variant={selectedCategory === category ? "default" : "outline"}
           >
             {category}
