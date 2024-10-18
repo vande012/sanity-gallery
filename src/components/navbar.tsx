@@ -4,9 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { urlForImage } from "@/sanity/lib/image";
 import { GalleryCategory, Navbar } from "../lib/types";
-import { Menu, Facebook } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import facebookLogo from "../../public/facebook-f-logo.svg";
 interface NavbarComponentProps {
@@ -124,7 +123,7 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
                 className="text-[#6e4140] hover:text-gray-700 transition-colors"
               >
                 <Image
-                  src={ facebookLogo }
+                  src={facebookLogo}
                   alt="Facebook"
                   width={24}
                   height={24}
@@ -132,7 +131,9 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
               </a>
 
               <Link href="/#contact-form">
-                <Button className="bg-[#9a992e] hover:bg-[#3F6132] text-white">Contact</Button>
+                <Button className="bg-[#9a992e] hover:bg-[#3F6132] text-white">
+                  Contact
+                </Button>
               </Link>
             </div>
           )}
@@ -152,31 +153,11 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
       {/* Mobile Menu */}
       {isMobile && isMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/about"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              About
-            </Link>
-            {categories.map((category) => (
-              <button
-                key={category._key}
-                onClick={() => handleCategoryClick(category.name)}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-              >
-                {category.name}
-              </button>
-            ))}
-            {data.ctaText && data.ctaLink && (
-              <Link
-                href={data.ctaLink}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-              >
-                {data.ctaText}
-              </Link>
-            )}
-            <a
+          <div className="px-2 pt-2 pb-3 sm:px-3">
+            <div className="flex">
+              {/* Left column: Houzz and Facebook */}
+              <div className="w-1/2 space-y-2">
+              <a
               href="https://www.houzz.com/pro/colleenjt"
               target="_blank"
               rel="noopener noreferrer"
@@ -192,20 +173,46 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
             </a>
 
             <a
-              href="https://www.facebook.com/iedesignltd/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              <Image
-                src="/images/facebook-f-logo.svg"
-                alt="Facebook"
-                width={20}
-                height={20}
-                className="mr-2"
-              />
-              Facebook
-            </a>
+                href="https://www.facebook.com/iedesignltd/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6e4140] hover:text-gray-700 transition-colors"
+              >
+                <Image
+                  src={ facebookLogo }
+                  alt="Facebook"
+                  width={40}
+                  height={40}
+                  className="ml-12 mt-12"
+                />
+              </a>
+              </div>
+
+              {/* Right column: Navigation links */}
+              <div className="w-1/2 space-y-2">
+                <Link
+                  href="/about"
+                  className="block px-3 py-2 rounded-md text-lg font-medium text-[#6e4140] hover:text-gray-900 hover:bg-gray-50"
+                >
+                  About
+                </Link>
+                {categories.map((category) => (
+                  <button
+                    key={category._key}
+                    onClick={() => handleCategoryClick(category.name)}
+                    className="block w-full text-left px-3 py-2 rounded-md text-lg font-medium text-[#6e4140] hover:text-gray-900 hover:bg-gray-50"
+                  >
+                    {category.name}
+                  </button>
+                ))}
+                <Link
+                  href="/#contact-form"
+                  className="block px-3 py-2 rounded-md text-lg font-medium text-[#6e4140] hover:text-gray-900 hover:bg-gray-50"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       )}
