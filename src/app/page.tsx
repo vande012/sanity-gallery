@@ -13,6 +13,9 @@ import { galleryCategoriesQuery } from '../sanity/lib/queries';
 import { ReviewComponent } from '@/components/review-component';
 import { Review } from '../lib/types';
 import { reviewsQuery } from '../sanity/lib/queries';
+import { Footer as FooterType } from '../lib/types';
+import { footerQuery } from '../sanity/lib/queries';
+import Footer from '../components/footer';
 
 export default async function Home() {
   const galleryImage: GalleryType = await getGallery();
@@ -20,6 +23,8 @@ export default async function Home() {
   const navbar: Navbar = await client.fetch(navbarQuery);
   const categories: GalleryCategory[] = await client.fetch(galleryCategoriesQuery);
   const reviews: Review[] = await client.fetch(reviewsQuery);
+  const footer: FooterType = await client.fetch(footerQuery);
+  
   return (
     <main className="">
       <NavbarComponent data={navbar} categories={categories} />
@@ -29,6 +34,7 @@ export default async function Home() {
       <section id="contact-form">
       <ContactForm />
       </section>
+      <Footer data={footer} />
     </main>
   );
 }

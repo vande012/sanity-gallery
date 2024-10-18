@@ -2,7 +2,7 @@ import { defineType, defineField } from 'sanity'
 
 export default defineType({
   name: 'navbar',
-  title: 'Navbar',
+  title: 'Navbar and Footer',
   type: 'document',
   fields: [
     defineField({
@@ -38,6 +38,36 @@ export default defineType({
       name: 'ctaLink',
       title: 'CTA Button Link',
       type: 'string',
+    }),
+    defineField({
+      name: 'footerLogo',
+      title: 'Footer Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'footerImage',
+      title: 'Footer Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'footerLinks',
+      title: 'Footer Links',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'text', type: 'string', title: 'Link Text' },
+            { name: 'url', type: 'string', title: 'URL' },
+          ],
+        },
+      ],
     }),
   ],
 })

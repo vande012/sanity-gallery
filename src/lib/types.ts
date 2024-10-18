@@ -52,3 +52,13 @@ export interface Review {
   text: string;
   rating: number;
 }
+
+export interface Footer {
+  footerLogo: string;
+  footerImage: string;
+  footerLinks: FooterLink[];
+}
+export interface FooterLink {
+    text: string;
+    url: string;
+  }

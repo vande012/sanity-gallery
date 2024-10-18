@@ -6,9 +6,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { urlForImage } from "@/sanity/lib/image";
 import { GalleryCategory, Navbar } from "../lib/types";
-import { Menu } from "lucide-react";
+import { Menu, Facebook } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import facebookLogo from "../../public/facebook-f-logo.svg";
 interface NavbarComponentProps {
   data: Navbar | null;
   categories: GalleryCategory[];
@@ -70,7 +70,7 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
                 alt="Logo Badge"
                 width={120}
                 height={50}
-                className="h-14 w-auto"
+                className="h-14 w-auto md:pl-6"
               />
             )}
             {data.thirdLogo && (
@@ -115,6 +115,21 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
               >
                 Houzz Profile
               </Link>
+
+              {/* Facebook Icon */}
+              <a
+                href="https://www.facebook.com/iedesignltd/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6e4140] hover:text-gray-700 transition-colors"
+              >
+                <Image
+                  src={ facebookLogo }
+                  alt="Facebook"
+                  width={24}
+                  height={24}
+                />
+              </a>
 
               <Link href="/#contact-form">
                 <Button className="bg-[#9a992e] hover:bg-[#3F6132] text-white">Contact</Button>
@@ -174,6 +189,22 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
                 height={100}
                 className="h-13 w-13"
               />
+            </a>
+
+            <a
+              href="https://www.facebook.com/iedesignltd/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+            >
+              <Image
+                src="/images/facebook-f-logo.svg"
+                alt="Facebook"
+                width={20}
+                height={20}
+                className="mr-2"
+              />
+              Facebook
             </a>
           </div>
         </div>

@@ -61,3 +61,14 @@ export const reviewsQuery = groq`
     rating
   }
 `
+
+export const footerQuery = groq`
+  *[_type == "navbar"][0] {
+    "footerLogo": footerLogo.asset->url,
+    "footerImage": footerImage.asset->url,
+    footerLinks[] {
+      text,
+      url
+    }
+  }
+`
