@@ -31,7 +31,9 @@ export async function getGallery(): Promise<GalleryType> {
 
 export const navbarQuery = groq`
   *[_type == "navbar"][0] {
-    logo,
+    "logo": logo.asset->url,
+    "secondaryLogo": secondaryLogo.asset->url,
+    "thirdLogo": thirdLogo.asset->url,
     ctaText,
     ctaLink
   }
@@ -50,5 +52,12 @@ export const aboutPageQuery = groq`
     "headerImage": headerImage.asset->url,
     content,
     additionalContent
+  }
+`
+export const reviewsQuery = groq`
+  *[_type == "review"] | order(_createdAt desc) {
+    name,
+    text,
+    rating
   }
 `

@@ -29,7 +29,7 @@ export function HeroComponent({ hero }: HeroComponentProps) {
 
         {/* Text content */}
         <div className="w-full md:w-1/2 space-y-6">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#6e4140]">
             {hero.header}
           </h1>
           <div className="text-xl text-gray-600 max-w-2xl space-y-4">
@@ -42,7 +42,7 @@ export function HeroComponent({ hero }: HeroComponentProps) {
               }}
             />
           </div>
-          <Button size="lg" className="text-lg px-8" asChild>
+          <Button size="lg" className="text-lg px-8 bg-[#9a992e] hover:bg-[#3F6132] text-white" asChild>
             <a href={hero.button.link}>{hero.button.text}</a>
           </Button>
         </div>

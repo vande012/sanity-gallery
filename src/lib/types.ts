@@ -12,6 +12,7 @@ export interface GalleryImage {
 export interface GalleryCategory {
   _key: string;
   name: string;
+  slug: string;
   images: GalleryImage[];
 }
 
@@ -32,7 +33,9 @@ export interface Hero {
   }
 
   export interface Navbar {
-    logo: Image
+    logo: string
+    secondaryLogo?: string
+    thirdLogo?: string
     ctaText: string
     ctaLink: string
   }
@@ -43,3 +46,9 @@ export interface AboutPage {
     content: PortableTextBlock[];
     additionalContent?: PortableTextBlock[];
   }
+
+export interface Review {
+  name: string;
+  text: string;
+  rating: number;
+}

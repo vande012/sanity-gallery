@@ -178,7 +178,7 @@ export function ContactForm() {
           />
           
           <div className="flex justify-center">
-            <Button type="submit" className="md:w-1/4" disabled={isSubmitting}>
+            <Button type="submit" className="md:w-1/4 bg-[#9a992e] hover:bg-[#3F6132] text-white" disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </div>

@@ -51,12 +51,12 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
     <nav className="bg-[#f8f5e1] shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
+          {/* Logo and Secondary Logo */}
+          <div className="flex items-center space-x-6">
             <Link href="/" className="flex items-center">
               {data.logo && (
                 <Image
-                  src={urlForImage(data.logo)?.url() || ""}
+                  src={data.logo || ""}
                   alt="Interior Design Logo"
                   width={120}
                   height={40}
@@ -64,6 +64,24 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
                 />
               )}
             </Link>
+            {data.secondaryLogo && (
+              <Image
+                src={data.secondaryLogo}
+                alt="Logo Badge"
+                width={120}
+                height={50}
+                className="h-14 w-auto"
+              />
+            )}
+            {data.thirdLogo && (
+              <Image
+                src={data.thirdLogo}
+                alt="Logo Badge"
+                width={120}
+                height={50}
+                className="h-14 w-auto"
+              />
+            )}
           </div>
 
           {/* Desktop Menu */}
@@ -71,12 +89,12 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
             <div className="hidden md:flex items-center space-x-6">
               <Link
                 href="/about"
-                className="text-gray-500 hover:text-gray-700 transition-colors"
+                className="text-[#6e4140] hover:text-gray-700 transition-colors"
               >
                 About
               </Link>
               <div className="relative group">
-                <button className="text-gray-500 hover:text-gray-700 transition-colors">
+                <button className="text-[#6e4140] hover:text-gray-700 transition-colors">
                   Galleries
                 </button>
                 <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
@@ -84,7 +102,7 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
                     <button
                       key={category._key}
                       onClick={() => handleCategoryClick(category.name)}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-[#6e4140] hover:bg-gray-100"
                     >
                       {category.name}
                     </button>
@@ -93,14 +111,14 @@ export function NavbarComponent({ data, categories }: NavbarComponentProps) {
               </div>
               <Link
                 href="https://www.houzz.com/pro/colleenjt"
-                className="text-gray-500 hover:text-gray-700 transition-colors"
+                className="text-[#6e4140] hover:text-gray-700 transition-colors"
               >
                 Houzz Profile
               </Link>
 
-              
-                <Link href="/#contact-form"><Button>Contact</Button></Link>
-             
+              <Link href="/#contact-form">
+                <Button className="bg-[#9a992e] hover:bg-[#3F6132] text-white">Contact</Button>
+              </Link>
             </div>
           )}
 

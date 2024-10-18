@@ -58,7 +58,7 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
 
   return (
     <section ref={galleryRef} id="gallery" className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">Our Portfolio</h2>
+      <h2 className="text-4xl font-bold text-center mb-8">Our Portfolio</h2>
       <div className="flex justify-center space-x-2 mb-8">
         {categories.map((category) => (
           <Button
@@ -68,6 +68,13 @@ const Gallery: React.FC<GalleryProps> = ({ items }) => {
               window.history.pushState(null, '', `#gallery-${category.toLowerCase().replace(/\s+/g, '-')}`);
             }}
             variant={selectedCategory === category ? "default" : "outline"}
+            className={`
+              ${selectedCategory === category 
+                ? "bg-[#3F6132] hover:bg-[#3F6132]" 
+                : "bg-[#9a992e] hover:bg-[#3F6132]"
+              } 
+              text-white
+            `}
           >
             {category}
           </Button>

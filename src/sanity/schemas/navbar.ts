@@ -7,7 +7,23 @@ export default defineType({
   fields: [
     defineField({
       name: 'logo',
-      title: 'Logo',
+      title: 'Primary Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'secondaryLogo',
+      title: 'Secondary Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'thirdLogo',
+      title: 'Third Logo',
       type: 'image',
       options: {
         hotspot: true,
