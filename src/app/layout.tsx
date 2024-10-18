@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Inter, Mate_SC } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({ subsets: ['latin'] })
+const mateSC = Mate_SC({ 
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-mate-sc'
+})
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +38,7 @@ export default async function RootLayout({
   
       <body
       
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} ${mateSC.variable} antialiased`}
       >
         {children}
       </body>

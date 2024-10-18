@@ -32,7 +32,7 @@ export function HeroComponent({ hero }: HeroComponentProps) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
             {hero.header}
           </h1>
-          <div className="text-xl text-gray-600 space-y-4">
+          <div className="text-xl text-gray-600 max-w-2xl space-y-4">
             <PortableText 
               value={hero.paragraph}
               components={{
@@ -45,6 +45,15 @@ export function HeroComponent({ hero }: HeroComponentProps) {
           <Button size="lg" className="text-lg px-8" asChild>
             <a href={hero.button.link}>{hero.button.text}</a>
           </Button>
+        </div>
+        <div className="flex-1 relative w-full aspect-[4/3] md:aspect-square">
+          <Image
+             src={urlForImage(hero.image).url()}
+            alt="Hero image"
+            fill
+            className="object-cover rounded-lg shadow-2xl"
+            priority
+          />
         </div>
       </div>
     </section>

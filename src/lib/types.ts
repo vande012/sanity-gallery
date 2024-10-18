@@ -36,3 +36,10 @@ export interface Hero {
     ctaText: string
     ctaLink: string
   }
+
+export interface AboutPage {
+    title: string;
+    headerImage: string;
+    content: PortableTextBlock[];
+    additionalContent?: PortableTextBlock[];
+  }

@@ -8,8 +8,12 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
+  	extend: {	  
   		colors: {
+			customGreen: {
+				DEFAULT: '#fdfaf0',
+				hover: '#e6e3da',
+			  },
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -55,7 +59,10 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		fontFamily: {
+        'mate-sc': ['var(--font-mate-sc)', 'serif'],
+      },
   	}
   },
   plugins: [require("tailwindcss-animate")],

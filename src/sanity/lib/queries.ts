@@ -44,3 +44,11 @@ export const galleryCategoriesQuery = groq`
     "slug": name
   }
 `
+export const aboutPageQuery = groq`
+  *[_type == "aboutPage"][0] {
+    title,
+    "headerImage": headerImage.asset->url,
+    content,
+    additionalContent
+  }
+`

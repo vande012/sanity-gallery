@@ -4,7 +4,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f8f5e1;
+  background-color: #fdfaf0;
 }
 
 @layer utilities {
@@ -15,6 +15,9 @@ body {
 
 
 @layer base {
+  h1, h2, h3 {
+    @apply font-mate-sc;
+  }
   :root {
     --background: 0 0% 100%;  
     --foreground: 222.2 84% 4.9%;

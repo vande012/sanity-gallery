@@ -22,7 +22,9 @@ export default async function Home() {
       <NavbarComponent data={navbar} categories={categories} />
       <HeroComponent hero={hero}/>
       <Gallery items={galleryImage} />
+      <section id="contact-form">
       <ContactForm />
+      </section>
     </main>
   );
 }

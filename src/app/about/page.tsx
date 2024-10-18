@@ -1,34 +1,58 @@
 import Image from 'next/image'
+import { PortableText } from '@portabletext/react'
+import { client } from '../../lib/sanity'
+import { aboutPageQuery } from '../../sanity/lib/queries'
+import { AboutPage } from '../../lib/types'
+import { NavbarComponent } from '../../components/navbar'
+import { Navbar } from '../../lib/types';
+import { navbarQuery } from '../../sanity/lib/queries';
+import { GalleryCategory } from '../../lib/types';
+import { galleryCategoriesQuery } from '../../sanity/lib/queries';
 
-export default function About() {
+export default async function About() {
+  const aboutData: AboutPage = await client.fetch(aboutPageQuery)
+  const navbar: Navbar = await client.fetch(navbarQuery);
+  const categories: GalleryCategory[] = await client.fetch(galleryCategoriesQuery);
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6">About Us</h1>
-      <div className="grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <p className="mb-4">
-            Welcome to our interior design studio. We are passionate about creating beautiful, 
-            functional spaces that reflect our clients' unique personalities and lifestyles.
-          </p>
-          <p className="mb-4">
-            With years of experience in the industry, our team of skilled designers brings creativity, 
-            expertise, and attention to detail to every project we undertake.
-          </p>
-          <p>
-            Whether you're looking to renovate your home, design a new office space, or simply 
-            refresh your current interiors, we're here to help bring your vision to life.
-          </p>
+    <>
+      <NavbarComponent data={navbar} categories={categories} />
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row gap-8 mb-12">
+          <div className="w-full md:w-1/2 h-[50vh] relative aspect-square md:aspect-auto">
+            <Image
+              src={aboutData.headerImage}
+              alt="About Us Header"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="rounded-lg"
+            />
+          </div>
+          <div className="w-full md:w-1/2 flex flex-col justify-center">
+            <h1 className="text-4xl font-bold mb-6 text-center">{aboutData.title}</h1>
+            <div className="prose max-w-none">
+              <PortableText 
+                value={aboutData.content} 
+                components={{
+                  block: {
+                    normal: ({children}) => <p className="mb-4">{children}</p>,
+                  },
+                }}
+              />
+            </div>
+          </div>
         </div>
-        <div className="relative h-64 md:h-auto">
-          <Image
-            src="/about-image.jpg"
-            alt="Interior Design Studio"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
+        <div className="prose max-w-none mx-auto text-center">
+          <PortableText 
+            value={aboutData.additionalContent || []} 
+            components={{
+              block: {
+                normal: ({children}) => <p className="mb-4 mt-2">{children}</p>,
+              },
+            }}
           />
         </div>
       </div>
-    </div>
+    </>
   )
 }
