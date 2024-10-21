@@ -53,11 +53,12 @@ function Gallery({ items }: GalleryProps) {
     };
   }, [handleCategoryChange]);
 
-  const displayImages: GalleryImage[] =
+  const displayImages = useMemo(() => 
     selectedCategory === "All"
       ? items.categories.flatMap((cat) => cat.images)
-      : items.categories.find((cat) => cat.name === selectedCategory)?.images ||
-        [];
+      : items.categories.find((cat) => cat.name === selectedCategory)?.images || [],
+    [selectedCategory, items.categories]
+  );
 
   return (
     <section ref={galleryRef} id="gallery" className="container mx-auto px-4 py-12">

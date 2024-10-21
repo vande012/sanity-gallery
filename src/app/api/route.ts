@@ -33,23 +33,13 @@ export async function POST(request: Request) {
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ message: 'Thank you, your message has been sent successfully!' }, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return NextResponse.json(
+      { message: 'Thank you, your message has been sent successfully!' },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error in POST /api:', error);
-    let errorMessage = 'An unexpected error occurred. Please try again later.';
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-    return NextResponse.json({ error: errorMessage }, {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred. Please try again later.';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
