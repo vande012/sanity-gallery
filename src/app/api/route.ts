@@ -1,5 +1,4 @@
 // src/app/api/contact/route.js
-import { client } from '@/sanity/lib/client'
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 

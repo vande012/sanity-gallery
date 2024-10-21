@@ -8,11 +8,16 @@ import { Navbar } from '../../lib/types';
 import { navbarQuery } from '../../sanity/lib/queries';
 import { GalleryCategory } from '../../lib/types';
 import { galleryCategoriesQuery } from '../../sanity/lib/queries';
+import { Footer as FooterType } from '../../lib/types';
+import { footerQuery } from '../../sanity/lib/queries';
+import Footer from '../../components/footer';
+
 
 export default async function About() {
   const aboutData: AboutPage = await client.fetch(aboutPageQuery)
   const navbar: Navbar = await client.fetch(navbarQuery);
   const categories: GalleryCategory[] = await client.fetch(galleryCategoriesQuery);
+  const footer: FooterType = await client.fetch(footerQuery);
 
   return (
     <>
@@ -53,6 +58,7 @@ export default async function About() {
           />
         </div>
       </div>
+      <Footer data={footer} />
     </>
   )
 }

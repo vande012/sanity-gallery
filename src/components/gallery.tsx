@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -12,16 +12,19 @@ interface GalleryProps {
   items: GalleryType;
 }
 
-const Gallery: React.FC<GalleryProps> = ({ items }) => {
+function Gallery({ items }: GalleryProps) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const galleryRef = useRef<HTMLElement>(null);
 
-  const categories = ["All", ...items.categories.map((cat) => cat.name)];
+  const categories = useMemo(() => ["All", ...items.categories.map((cat) => cat.name)], [items.categories]);
 
   const handleCategoryChange = useCallback((hash: string) => {
     if (hash.startsWith('gallery-')) {
-      const category = hash.replace('gallery-', '').replace(/-/g, ' ');
-      const matchedCategory = categories.find(cat => cat.toLowerCase() === category.toLowerCase());
+      const categoryFromHash = hash.replace('gallery-', '').replace(/-/g, ' ');
+      const matchedCategory = categories.find(
+        cat => cat.toLowerCase() === categoryFromHash.toLowerCase()
+      );
+      
       if (matchedCategory) {
         setSelectedCategory(matchedCategory);
         if (galleryRef.current) {

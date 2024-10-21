@@ -3,6 +3,7 @@ import { Hero } from '@/lib/types'
 import { apiVersion, dataset, projectId } from '../env'
 import { heroQuery } from './queries'
 import imageUrlBuilder from '@sanity/image-url'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 export const client = createClient({
   projectId,
@@ -17,6 +18,6 @@ export async function getHero(): Promise<Hero> {
 
 const builder = imageUrlBuilder(client)
 
-export function urlForImage(source: any) {
-  return builder.image(source)
+export function urlForImage(source: SanityImageSource) {
+  return builder.image(source);
 }
