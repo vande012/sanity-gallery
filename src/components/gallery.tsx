@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { GalleryImage } from "../lib/types";
 import type { GalleryType } from "../lib/types";
 import { urlFor } from "../lib/sanity";
 
